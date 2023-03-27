@@ -53,7 +53,7 @@
 
         function edit(userid) {
         const obj = {userid};
-        const method = "POST";
+        const method = "GET";
         const body = Object.keys(obj).reduce((o,key)=>(o.set(key, obj[key]), o), new FormData());
         const headers = {
             'Accept': 'application/json'
