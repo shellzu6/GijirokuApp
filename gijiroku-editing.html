@@ -39,5 +39,30 @@
             </tr>
         </tbody>
     </table>
+    <input type="text" name="userId" id="userId">
+    <button id="btn">編集</button>
+
 </body>
+<script>
+    const api = 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku';
+    var btn = document.getElementById('btn');
+    btn.addEventListener('click', function () {
+        edit(
+            document.getElementById('userId').value,
+        );
+
+        function edit(userid) {
+        const obj = {userid};
+        const method = "POST";
+        const body = Object.keys(obj).reduce((o,key)=>(o.set(key, obj[key]), o), new FormData());
+        const headers = {
+            'Accept': 'application/json'
+        };
+        
+        fetch(api, {method, headers, body, mode: "cors"})
+            .then((res)=> res.json())
+            .then(console.log)
+            .catch(console.error);
+    }
+</script>
 </html>
