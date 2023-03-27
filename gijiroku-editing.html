@@ -1,69 +1,26 @@
 <! --shellzuの作業場所-->
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>議事録管理システム</title>
-</head>
-<body>
-    <a href="index.html">議事録一覧画面</a>
-    <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-details.html">議事録詳細画面(開発用ボタン)</a>
-    <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-editing.html">議事録編集画面(開発用ボタン)</a>
-    <p>編集画面</p>
-    <button type=“button” onclick="location.href='https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku'">API呼び出しボタン</button>
-    <table class="title">
-        <thead>
-            <tr>
-                <th class="p1">日時<br></th>
-                <th class="p2">会議内容<br></th>
-                <th class="p3">キーフレーズ<br></th>
-                <th class="p4">盛り上がり<br></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="p1">
-                    2023年3月8日13時28分
-                </td>
-                <td class="p2">
-                    これから会議を始めます。まず
-                </td>
-                <td class="p3">
-                    会議、進捗、遅れ
-                </td>
-                <td class="p4">
-                    ( ﾟДﾟ)
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <input type="text" name="userId" id="userId">
-    <button id="btn">編集</button>
+    <!DOCTYPE html>
+    <html lang="ja">
 
-</body>
-<script>
-    const api = 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku';
-    var btn = document.getElementById('btn');
-    btn.addEventListener('click', function () {
-        edit(
-            document.getElementById('userId').value
-        );
-    })
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>議事録管理システム</title>
+    </head>
 
-        function edit(userid) {
-        const obj = {userid};
-        const method = "GET";
-        const body = Object.keys(obj).reduce((o,key)=>(o.set(key, obj[key]), o), new FormData());
-        const headers = {
-            'Accept': 'application/json'
-        };
-        
-        fetch(api, {method, headers, body, mode: "cors"})
-            .then((res)=> res.json())
-            .then(console.log)
-            .catch(console.error);
-    }
-</script>
-</html>
+    <body>
+        <a href="index.html">議事録一覧画面</a>
+        <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-details.html">議事録詳細画面(開発用ボタン)</a>
+        <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-editing.html">議事録編集画面(開発用ボタン)</a>
+        <p>編集画面</p>
+        <button type=“button”
+            onclick="location.href='https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku'">API呼び出しボタン</button>
+
+    </body>
+    <script>
+        const res = fetch("https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku");
+        console.log(res)
+    </script>
+
+    </html>
