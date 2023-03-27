@@ -21,6 +21,15 @@
     <script>
         const api = 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku';
         console.log(api)
+        edit()
+
+        async function edit() {
+            var result = await fetch(api, { mode: "no-cors" })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data)
+                })
+        }
     </script>
 
     </html>
