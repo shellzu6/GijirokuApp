@@ -24,11 +24,15 @@
         edit()
 
         async function edit() {
-            var result = await fetch(api, { mode: "no-cors" })
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data)
-                })
+            var result = await fetch(api, { mode: 'no-cors' })
+            console.log(result)
+            var newObj = {}
+            var objStr = {}
+            Object.keys(result).forEach(function (key) {
+                newObj[key] = result[key];
+            });
+            objStr = JSON.stringify(newObj)
+            console.log(objStr)
         }
     </script>
 
