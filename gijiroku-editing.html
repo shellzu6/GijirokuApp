@@ -16,24 +16,29 @@
         <p>編集画面</p>
         <button type=“button”
             onclick="location.href='https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku'">API呼び出しボタン</button>
+        <button id="btn">議事録一覧画面・・</button>
 
     </body>
     <script>
-        const api = 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku';
-        console.log(api)
-        edit()
+        const btn = document.getElementById('btn')
+        let data = ''
 
-        async function edit() {
-            var result = await fetch(api, { mode: 'no-cors' })
-            console.log(result)
-            var newObj = {}
-            var objStr = {}
-            Object.keys(result).forEach(function (key) {
-                newObj[key] = result[key];
-            });
-            objStr = JSON.stringify(newObj)
-            console.log(objStr)
-        }
+        btn.addEventListener('click', function () {
+            // XMLHttpRequestオブジェクトの作成
+            var request = new XMLHttpRequest()
+            // URLを開く
+            request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
+            // レスポンスが返ってきた時の処理を記述 
+            request.onload = function () {
+                console.log(request)
+                console.log(request.response)
+                data = JSON.stringify(request, ['status', 'response'])
+                document.write(`<h3>${data}</h3>`)
+            }
+            // リクエストをURLに送信
+            request.send();
+        })
+
     </script>
 
     </html>
