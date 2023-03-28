@@ -31,10 +31,9 @@
             request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
             // レスポンスが返ってきた時の処理を記述 
             request.onload = function () {
-                console.log(request)
-                console.log(request.response)
-                data = JSON.stringify(request, ['status', 'response'])
-                // console.log(JSON.parse(data))
+                var resobj = JSON.parse(request.response)
+                data = resobj.body.TimeStamp
+
                 document.write(`
                     <table class="title">
                         <thead>
