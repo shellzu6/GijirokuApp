@@ -1,6 +1,7 @@
 <! --北川さんの作業場所-->
 
 <!DOCTYPE html>
+<table class="price">
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -39,3 +40,141 @@
     </table>
 </body>
 </html>
+    
+    
+/* CSSコード */
+table.price {
+  width: 500px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 1px 0;
+  font-size: 15px;
+}
+
+table.price th,table.price td {
+  padding: 10px;
+}
+
+table.price th {
+  box-shadow: 0px 1px 1px rgba(255,255,255,0.8) inset;
+  border-radius: 5px 5px 10px 10px;
+  background: #88b7d5;
+  vertical-align: middle;
+  text-align: center;
+  width: 125px;
+  height: 50px;
+  position: relative;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  font-size: 24px;
+}
+
+table.price th.p1 {
+  background: rgb(162,206,26); 
+}
+
+table.price th.p2 {
+  background: rgb(237,73,147);
+}
+
+table.price th.p3 {
+  background: rgb(29,140,233);
+}
+
+table.price th:after {
+  top: 55px;
+  left: 5px;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border: 78px solid transparent;
+}
+
+
+@-moz-document url-prefix() {
+table.price th {
+  text-indent: 10px;
+}
+
+table.price th::after {
+  padding: 0;
+  top: 30px;
+  left: 0;
+  content: "";
+  height: 0;
+  width: 0;
+  position: relative;
+  pointer-events: none;
+  border: 50px solid transparent;
+  border-top: rgb(162,206,26) 15px solid;
+}
+
+}
+table.price th.p1:after {
+  border-top: rgb(162,206,26) 15px solid;
+}
+
+table.price th.p2:after {
+  border-top: rgb(237,73,147) 15px solid;
+}
+table.price th.p3:after {
+border-top: rgb(29,140,233) 15px solid;
+}
+
+table.price td {
+box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+text-align: center;
+padding-top: 15px;
+border: none;
+height: 70px;
+}
+
+table.price tr:nth-child(2n+1) td.p1 {
+background: #f7f9e8;
+}
+table.price tr:nth-child(2n+0) td.p1 {
+background: #e2efbc;
+}
+
+table.price tr:nth-child(2n+1) td.p2 {
+background: #ffecf5;
+}
+table.price tr:nth-child(2n+0) td.p2 {
+background: #ffdfed;
+}
+
+table.price tr:nth-child(2n+1) td.p3 {
+background: #fff;
+}
+table.price tr:nth-child(2n+0) td.p3 {
+background: #eee;
+}
+
+table.price tr:last-child td {
+border-radius: 0 0 5px 5px;
+box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+}
+
+table.price tr:last-child td button {
+  font-size:12px;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  border:1px solid #ffaa22;
+  padding:9px 18px;
+  text-decoration:none;
+  background-color:#ffec64;
+  color:#333333;
+  display:inline-block;
+}
+
+table.price tr:last-child td button:hover {
+  background-color:#ffab23;
+}
+
+table.price tr:last-child td button {
+  position:relative;
+  top:1px;
+}
