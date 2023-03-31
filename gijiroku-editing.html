@@ -3,7 +3,7 @@
     <!DOCTYPE html>
     <html lang="ja">
 
-    
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,34 +23,52 @@
     </body>
     <script>
         const btn = document.getElementById('btn')
-        let data = ''
 
         btn.addEventListener('click', function () {
+            document.write(`
+                    <table class="title">
+                        <thead>
+                            <tr>
+                                <th class="p1">日時<br></th>
+                                <th class="p1">議事録<br></th>
+                                <th class="p1">キーフレーズ<br></th>
+                                <th class="p1">盛り上がり度<br></th>
+                            </tr>
+                        </thead>
+                    </table>`
+                )
+
             // XMLHttpRequestオブジェクトの作成
             var request = new XMLHttpRequest()
             // URLを開く
             request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
             // レスポンスが返ってきた時の処理を記述 
             request.onload = function () {
-                var resobj = JSON.parse(request.response)
-                data = resobj.body.TimeStamp
+                var body = JSON.parse(request.response)['body']
 
-                document.write(`
+                var keys = Object.keys(body)
+
+                keys.forEach((key) => document.write(`
                     <table class="title">
-                        <thead>
-                            <tr>
-                                <th class="p1">日時<br></th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
                                 <td class="p1">
-                                    ${data}
+                                    ${body[key]['TimeStamp']}
+                                </td>
+                                <td class="p1">
+                                    ${body[key]['GijirokuText']}
+                                </td>
+                                <td class="p1">
+                                    ${body[key]['KeyPhrase1']}
+                                </td>
+                                <td class="p1">
+                                    ${body[key]['Emo']}
                                 </td>
                             </tr>
                         </tbody>
                     </table>`
-                )
+                ))
+
             }
             // リクエストをURLに送信
             request.send();
