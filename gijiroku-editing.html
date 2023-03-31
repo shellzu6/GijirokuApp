@@ -36,7 +36,7 @@
                             </tr>
                         </thead>
                     </table>`
-                )
+            )
 
             // XMLHttpRequestオブジェクトの作成
             var request = new XMLHttpRequest()
@@ -47,8 +47,21 @@
                 var body = JSON.parse(request.response)['body']
 
                 var keys = Object.keys(body)
+                
+                keys.forEach(function (key) {
+                    // キーフレーズの数分取得する
+                    var phrases = Object.keys(body[key]['KeyPhrase'])
+                    var keyphrases = []
+                    phrases.forEach(function (phrase) {
+                        keyphrases.push(body[key]['KeyPhrase'][phrase])
+                    });
 
-                keys.forEach((key) => document.write(`
+                    var str_keyphrases = ''
+                    keyphrases.forEach(function (keyphrase) {
+                        str_keyphrases = str_keyphrases + keyphrase
+                    })
+
+                    document.write(`
                     <table class="title">
                         <tbody>
                             <tr>
@@ -59,7 +72,7 @@
                                     ${body[key]['GijirokuText']}
                                 </td>
                                 <td class="p1">
-                                    ${body[key]['KeyPhrase1']}
+                                    ${str_keyphrases}
                                 </td>
                                 <td class="p1">
                                     ${body[key]['Emo']}
@@ -67,7 +80,10 @@
                             </tr>
                         </tbody>
                     </table>`
-                ))
+                    )
+
+                });
+
 
             }
             // リクエストをURLに送信
