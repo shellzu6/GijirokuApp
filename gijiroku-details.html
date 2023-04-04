@@ -13,4 +13,68 @@
     <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-editing.html">議事録編集画面(開発用ボタン)</a>
     <p>議事録詳細画面だよ</p>
 </body>
+<script>
+    const btn = document.getElementById('btn')
+
+    btn.addEventListener('click', function () {
+        document.write(`
+                <table class="title">
+                    <thead>
+                        <tr>
+                            <th class="p1">日時<br></th>
+                            <th class="p1">議事録<br></th>
+                            <th class="p1">キーフレーズ<br></th>
+                            <th class="p1">盛り上がり度<br></th>
+                        </tr>
+                    </thead>
+                </table>`
+        )
+
+        // XMLHttpRequestオブジェクトの作成
+        var request = new XMLHttpRequest()
+        // URLを開く
+        request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
+        // レスポンスが返ってきた時の処理を記述 
+        request.onload = function () {
+            var body = JSON.parse(request.response)['body']
+
+            var keys = Object.keys(body)
+            
+            keys.forEach(function (key) {
+
+                document.write(`
+                <table class="title">
+                    <tbody>
+                        <tr>
+                            <td class="p1">
+                                ${body[key]['TimeStamp']}
+                            </td>
+                            <td class="p1">
+                                ${body[key]['GijirokuText']}
+                            </td>
+                            <td class="p1">
+                                ${str_keyphrases}
+                            </td>
+                            <td class="p1">
+                                ${body[key]['Emo']}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>`
+                )
+
+            });
+
+
+        }
+        // リクエストをURLに送信
+        request.send();
+
+
+
+    })
+
+</script>
 </html>
+
+
