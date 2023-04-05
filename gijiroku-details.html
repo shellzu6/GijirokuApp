@@ -32,15 +32,26 @@
 
         // XMLHttpRequestオブジェクトの作成
         var request = new XMLHttpRequest()
-        // URLを開く
-        request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
-        // レスポンスが返ってきた時の処理を記述 
-        request.onload = function () {
-            var body = JSON.parse(request.response)['body']
+            // URLを開く
+            request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
+            // レスポンスが返ってきた時の処理を記述 
+            request.onload = function () {
+                var body = JSON.parse(request.response)['body']
 
-            var keys = Object.keys(body)
-            
-            keys.forEach(function (key) {
+                var keys = Object.keys(body)
+                
+                keys.forEach(function (key) {
+                    // キーフレーズの数分取得する
+                    var phrases = Object.keys(body[key]['KeyPhrase'])
+                    var keyphrases = []
+                    phrases.forEach(function (phrase) {
+                        keyphrases.push(body[key]['KeyPhrase'][phrase])
+                    });
+
+                    var str_keyphrases = ''
+                    keyphrases.forEach(function (keyphrase) {
+                        str_keyphrases = str_keyphrases + keyphrase
+                    })
 
                 document.write(`
                 <table class="title">
