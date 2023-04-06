@@ -17,8 +17,10 @@
     const btn = document.getElementById('btn')
 
     btn.addEventListener('click', function () {
-        // XMLHttpRequestオブジェクトの作成
-        var request = new XMLHttpRequest()
+        btn.addEventListener('click', function () {
+
+            // XMLHttpRequestオブジェクトの作成
+            var request = new XMLHttpRequest()
             // URLを開く
             request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
             // レスポンスが返ってきた時の処理を記述 
@@ -77,5 +79,3 @@
 
 </script>
 </html>
-
-
