@@ -1,4 +1,4 @@
-<! --shellzuの作業場所-->
+<! --しらとりの作業場所-->
 
     <!DOCTYPE html>
     <html lang="ja">
@@ -52,15 +52,19 @@
                     <table class="title">
                         <tbody>
                             <tr>
+                                <th class="p1">日時<br></th>
                                 <td class="p1">
                                     ${body[key]['TimeStamp']}
                                 </td>
+                                <th class="p1">議事録<br></th>
                                 <td class="p1">
                                     ${body[key]['GijirokuText']}
                                 </td>
+                                <th class="p1">キーフレーズ<br></th>
                                 <td class="p1">
                                     ${str_keyphrases}
                                 </td>
+                                <th class="p1">盛り上がり度<br></th>
                                 <td class="p1">
                                     ${body[key]['Emo']}
                                 </td>
