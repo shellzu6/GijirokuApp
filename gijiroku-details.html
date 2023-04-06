@@ -1,39 +1,42 @@
-<! --白鳥さんの作業場所-->
+<! --shellzuの作業場所-->
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>議事録管理システム</title>
-</head>
-<body>
-    <a href="index.html">議事録一覧画面</a>
-    <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-details.html">議事録詳細画面(開発用ボタン)</a>
-    <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-editing.html">議事録編集画面(開発用ボタン)</a>
-    <p>議事録詳細画面だよ！！！</p>
-</body>
-<script>
-    const btn = document.getElementById('btn')
+    <!DOCTYPE html>
+    <html lang="ja">
 
-    btn.addEventListener('click', function () {
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>議事録管理システム</title>
+    </head>
+
+    <body>
+        <a href="index.html">議事録一覧画面</a>
+        <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-details.html">議事録詳細画面(開発用ボタン)</a>
+        <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-editing.html">議事録編集画面(開発用ボタン)</a>
+        <p>編集画面</p>
+        <button type=“button”
+            onclick="location.href='https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku'">API呼び出しボタン</button>
+        <button id="btn">議事録一覧画面・・</button>
+        <table id="tbl"></table>
+
+    </body>
+    <script>
+        const btn = document.getElementById('btn')
+
         btn.addEventListener('click', function () {
-
             // XMLHttpRequestオブジェクトの作成
             var request = new XMLHttpRequest()
             // URLを開く
             request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
             // レスポンスが返ってきた時の処理を記述 
             request.onload = function () {
-
-                // 指定したGijirokuIdのみを表示できるようにしたい。。。！（今は全件取得）
-
                 var body = JSON.parse(request.response)['body']
 
                 var keys = Object.keys(body)
                 
                 keys.forEach(function (key) {
-                    // キーフレーズの数の分取得する
+                    // キーフレーズの数分取得する
                     var phrases = Object.keys(body[key]['KeyPhrase'])
                     var keyphrases = []
                     phrases.forEach(function (phrase) {
@@ -45,37 +48,38 @@
                         str_keyphrases = str_keyphrases + keyphrase
                     })
 
-                document.write(`
-                <table class="title">
-                    <tbody>
-                        <tr>
-                            <td class="p1">
-                                ${body[key]['TimeStamp']}
-                            </td>
-                            <td class="p1">
-                                ${body[key]['GijirokuText']}
-                            </td>
-                            <td class="p1">
-                                ${str_keyphrases}
-                            </td>
-                            <td class="p1">
-                                ${body[key]['Emo']}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>`
-                )
+                    document.write(`
+                    <table class="title">
+                        <tbody>
+                            <tr>
+                                <td class="p1">
+                                    ${body[key]['TimeStamp']}
+                                </td>
+                                <td class="p1">
+                                    ${body[key]['GijirokuText']}
+                                </td>
+                                <td class="p1">
+                                    ${str_keyphrases}
+                                </td>
+                                <td class="p1">
+                                    ${body[key]['Emo']}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>`
+                    )
 
-            });
-
-
-        }
-        // リクエストをURLに送信
-        request.send();
+                });
 
 
+            }
+            // リクエストをURLに送信
+            request.send();
 
-    })
 
-</script>
-</html>
+
+        })
+
+    </script>
+
+    </html>
