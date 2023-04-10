@@ -11,91 +11,10 @@
     </head>
 
     <body>
-        <a href="index.html">議事録一覧画面</a>
-        <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-details.html">議事録詳細画面(開発用ボタン)</a>
-        <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-editing.html">議事録編集画面(開発用ボタン)</a>
         <p>編集画面</p>
-        <button type=“button”
-            onclick="location.href='https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku'">API呼び出しボタン</button>
-        <button id="btn">議事録一覧画面・・</button>
-        <table id="tbl"></table>
-
+        <a href="index.html">一覧に戻る</a>
     </body>
     <script>
-        const btn = document.getElementById('btn')
-
-        btn.addEventListener('click', function () {
-            document.write(`
-                    <table class="title">
-                        <thead>
-                            <tr>
-                                <th class="p1">日時<br></th>
-                                <th class="p1">議事録<br></th>
-                                <th class="p1">キーフレーズ<br></th>
-                                <th class="p1">盛り上がり度<br></th>
-                            </tr>
-                        </thead>
-                    </table>`
-            )
-
-            // XMLHttpRequestオブジェクトの作成
-            var request = new XMLHttpRequest()
-            // URLを開く
-            request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
-            // レスポンスが返ってきた時の処理を記述 
-            request.onload = function () {
-                var body = JSON.parse(request.response)['body']
-                // オブジェクトからキーを取得
-                var keys = Object.keys(body)
-                // キーの数だけループ
-                keys.forEach(function (key) {
-                    console.log(key)
-                    // キーフレーズを取得する
-                    var phrases = Object.keys(body[key]['KeyPhrase'])
-                    var keyphrases = []
-                    // キーフレーズの数だけループ
-                    phrases.forEach(function (phrase) {
-                        keyphrases.push(body[key]['KeyPhrase'][phrase])
-                    });
-
-                    // キーフレーズを繋げた文字列を作成（画面表示させるために無理やり文字列連結。改善が必要）
-                    var str_keyphrases = ''
-                    keyphrases.forEach(function (keyphrase) {
-                        str_keyphrases = str_keyphrases + keyphrase
-                    })
-
-                    document.write(`
-                    <table class="title">
-                        <tbody>
-                            <tr>
-                                <td class="p1">
-                                    ${body[key]['TimeStamp']}
-                                </td>
-                                <td class="p1">
-                                    ${body[key]['GijirokuText']}
-                                </td>
-                                <td class="p1">
-                                    ${str_keyphrases}
-                                </td>
-                                <td class="p1">
-                                    ${body[key]['Emo']}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>`
-                    )
-
-                });
-
-
-            }
-            // リクエストをURLに送信
-            request.send();
-
-
-
-        })
-
     </script>
 
     </html>
