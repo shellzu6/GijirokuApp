@@ -45,17 +45,20 @@
             // レスポンスが返ってきた時の処理を記述 
             request.onload = function () {
                 var body = JSON.parse(request.response)['body']
-
+                // オブジェクトからキーを取得
                 var keys = Object.keys(body)
-                
+                // キーの数だけループ
                 keys.forEach(function (key) {
-                    // キーフレーズの数分取得する
+                    console.log(key)
+                    // キーフレーズを取得する
                     var phrases = Object.keys(body[key]['KeyPhrase'])
                     var keyphrases = []
+                    // キーフレーズの数だけループ
                     phrases.forEach(function (phrase) {
                         keyphrases.push(body[key]['KeyPhrase'][phrase])
                     });
 
+                    // キーフレーズを繋げた文字列を作成（画面表示させるために無理やり文字列連結。改善が必要）
                     var str_keyphrases = ''
                     keyphrases.forEach(function (keyphrase) {
                         str_keyphrases = str_keyphrases + keyphrase
