@@ -53,6 +53,14 @@
                         str_keyphrases = str_keyphrases + keyphrase
                     })
 
+                    // 一覧画面では議事録を10文字まで表示
+                    max_length = 10
+                    if (body[key]['GijirokuText'].length > max_length) {
+                        gijirokutext = body[key]['GijirokuText'].substr(0, max_length) + '...'
+                    }else{
+                        gijirokutext = body[key]['GijirokuText']
+                    }
+
                     document.write(`
                     <table class="title">
                         <tbody>
@@ -61,7 +69,7 @@
                                     ${body[key]['TimeStamp']}
                                 </td>
                                 <td class="p1">
-                                    ${body[key]['GijirokuText']}
+                                    ${gijirokutext}
                                 </td>
                                 <td class="p1">
                                     ${str_keyphrases}
