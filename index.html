@@ -15,7 +15,10 @@
         <a href="index.html">議事録一覧画面</a>
     </body>
     <script>
-         <style>
+
+        window.onload = function () {
+            document.write(`
+     <style>
         .border-arrange1 {
          width: 480px;
          padding: 10px;
@@ -33,9 +36,7 @@
           border: dashed 1px orange;
           width: 500px;
       }
-          </style>
-        window.onload = function () {
-            document.write(`
+    </style>
             <caption class="border-arrange1">議事録一覧画面</caption>
                     <table width="1250" border="1" border="solid 2px orange">
                        <thead>
