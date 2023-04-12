@@ -18,14 +18,13 @@
     <script>
         window.onload = function () {
             document.write(`
-                    <table width="1000" border="1">
+                    <table width="1250" border="1">
                         <tbody>
                             <tr>
-                                <th class="p1">日時<br></th>
-                                <th class="p1">議事録<br></th>
-                                <th class="p1">キーフレーズ<br></th>
-                                <th class="p1">盛り上がり度<br></th>
-                            </tr>
+                                <th width="250">日時</th>
+                                <th width="250">議事録</th>
+                                <th width="500">キーフレーズ</th>
+                                <th width="250">盛り上がり度</th>
                             </tr>
                         </tbody>
                     </table>`
@@ -63,19 +62,19 @@
                     }
 
                     document.write(`
-                    <table width="1000" border="1">
+                     <table width="1250" border="1">
                         <tbody>
                             <tr>
-                                <td class="p1">
+                                <td width="250">
                                     ${body[key]['TimeStamp']}
                                 </td>
-                                <td class="p1">
+                                <td width="250">
                                     ${gijirokutext}
                                 </td>
-                                <td class="p1">
+                                <td width="500">
                                     ${str_keyphrases}
                                 </td>
-                                <td class="p1">
+                                <td width="250">
                                     ${body[key]['Emo']}
                                 </td>
                             </tr>
