@@ -14,19 +14,18 @@
     <body>
         <p>一覧画面</p>
         <a href="index.html">議事録一覧画面</a>
-
     </body>
-        <p>このテキストの色が青色になればOK</p>
     <script>
         window.onload = function () {
             document.write(`
-                    <table class="title">
+                    <table width="2500" border="1">
                         <thead>
                             <tr>
-                                <th class="p1">日時<br></th>
-                                <th class="p1">議事録<br></th>
-                                <th class="p1">キーフレーズ<br></th>
-                                <th class="p1">盛り上がり度<br></th>
+                                <th>日時</th>
+                                <th>議事録</th>
+                                <th>キーフレーズ</th>
+                                <th>盛り上がり度</th>
+                            </tr>
                             </tr>
                         </thead>
                     </table>`
@@ -64,7 +63,7 @@
                     }
 
                     document.write(`
-                    <table border="1">
+                    <table width="2500" border="1">
                         <tbody>
                             <tr>
                                 <td class="p1">
