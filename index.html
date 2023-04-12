@@ -5,28 +5,47 @@
 
 
     <head>
-        <link rel="stylesheet" href="style.css">
+        // <link rel="stylesheet" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>議事録管理システム</title>
     </head>
-
     <body>
         <p>一覧画面</p>
         <a href="index.html">議事録一覧画面</a>
     </body>
+         <style>
+        .border-arrange1 {
+         width: 480px;
+         padding: 10px;
+         margin: 20px;
+         font-size: 26px;
+         border-left: 10px solid #ff6347;
+         border-bottom: 2px solid #ff6347;
+         background-color: #eee;
+      }
+         .p1 {
+          border: dashed 1px orange;
+          width: 250px;
+      }
+          .p2 {
+          border: dashed 1px orange;
+          width: 500px;
+      }
+          </style>
     <script>
         window.onload = function () {
             document.write(`
-                    <table width="1250" border="1">
-                        <tbody>
+            <caption class="border-arrange1">議事録一覧画面</caption>
+                    <table width="1250" border="1" border="solid 2px orange">
+                       <thead>
                             <tr>
-                                <th width="250">日時</th>
-                                <th width="250">議事録</th>
-                                <th width="500">キーフレーズ</th>
-                                <th width="250">盛り上がり度</th>
+                                <th class="p1">日時<br></th>
+                                <th class="p1">議事録<br></th>
+                                <th class="p2">キーフレーズ<br></th>
+                                <th class="p1">盛り上がり度<br></th>
                             </tr>
-                        </tbody>
+                        </thead>
                     </table>`
             )
 
@@ -62,19 +81,19 @@
                     }
 
                     document.write(`
-                     <table width="1250" border="1">
+                    <table width="1250" border="1">
                         <tbody>
                             <tr>
-                                <td width="250">
+                                <td class="p1">
                                     ${body[key]['TimeStamp']}
                                 </td>
-                                <td width="250">
+                                <td class="p1">
                                     ${gijirokutext}
                                 </td>
-                                <td width="500">
+                                <td class="p2">
                                     ${str_keyphrases}
                                 </td>
-                                <td width="250">
+                                <td class="p1">
                                     ${body[key]['Emo']}
                                 </td>
                             </tr>
@@ -87,5 +106,4 @@
             request.send();
         }
     </script>
-
     </html>
