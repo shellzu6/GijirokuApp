@@ -69,9 +69,9 @@
 
                     var str_keyphrases = ''
                     keyphrases.forEach(function (keyphrase) {
-                        str_keyphrases = str_keyphrases + keyphrase
+                        str_keyphrases = str_keyphrases + keyphrase + ', '
                     })
-
+                    
                     // 一覧画面では議事録を10文字まで表示
                     max_length = 10
                     if (body[key]['GijirokuText'].length > max_length) {
@@ -91,7 +91,7 @@
                                     ${gijirokutext}
                                 </td>
                                 <td class="p2">
-                                    ${str_keyphrases}
+                                    ${str_keyphrases.slice(0, -2)}
                                 </td>
                                 <td class="p1">
                                     ${body[key]['Emo']}
