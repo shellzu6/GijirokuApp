@@ -35,7 +35,11 @@
       }
           .p2 {
           border: dashed 1px orange;
-          width: 500px;
+          width: 300px;
+      }
+          .p3 {
+          border: dashed 1px orange;
+          width: 700px;
       }
     </style>
             <h1 class="border-arrange1">議事録全文一覧画面(デモ用)</h1>
@@ -43,7 +47,7 @@
                        <thead>
                             <tr>
                                 <th class="p1">日時<br></th>
-                                <th class="p2">議事録<br></th>
+                                <th class="p3">議事録<br></th>
                                 <th class="p2">キーフレーズ<br></th>
                                 <th class="p1">盛り上がり度<br></th>
                             </tr>
@@ -89,7 +93,7 @@
                                 <td class="p1">
                                     ${body[key]['TimeStamp']}
                                 </td>
-                                <td class="p2">
+                                <td class="p3">
                                     ${body[key]['GijirokuText']}
                                 </td>
                                 <td class="p2">
