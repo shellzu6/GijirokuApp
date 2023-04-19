@@ -5,11 +5,13 @@
 
 
     <head>
-        // <link rel="stylesheet" href="style.css">
+        //
+        <link rel="stylesheet" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>議事録管理システム</title>
     </head>
+
     <body>
         <p>一覧画面</p>
         <a href="index.html">議事録全文一覧画面(デモ用)</a>
@@ -71,7 +73,7 @@
                     keyphrases.forEach(function (keyphrase) {
                         str_keyphrases = str_keyphrases + keyphrase + ', '
                     })
-                    
+
                     // 一覧画面では議事録を10文字まで表示
                     // max_length = 10
                     // if (body[key]['GijirokuText'].length > max_length) {
@@ -88,9 +90,7 @@
                                     ${body[key]['TimeStamp']}
                                 </td>
                                 <td class="p1">
-                                    <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-details.html">
-                                        ${body[key]['GijirokuText']}
-                                    </a>
+                                    ${body[key]['GijirokuText']}
                                 </td>
                                 <td class="p2">
                                     ${str_keyphrases.slice(0, -2)}
@@ -108,4 +108,5 @@
             request.send();
         }
     </script>
+
     </html>
