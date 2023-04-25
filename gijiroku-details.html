@@ -23,58 +23,60 @@
                 // オブジェクトからキーを取得
                 var keys = Object.keys(body)
                 
-                //console.log(key) // ここにNG出てる。。。Uncaught ReferenceError: key is not defined     at request.onload (gijiroku-details.html:38:29)
-                // キーフレーズを取得する
-                var phrases = Object.keys(body[key]['KeyPhrase'])
-                var keyphrases = []
-                // キーフレーズの数だけループ
-                phrases.forEach(function (phrase) {
-                    keyphrases.push(body[key]['KeyPhrase'][phrase])
+                keys.forEach(function (key) {
+                    //console.log(key) // ここにNG出てる。。。Uncaught ReferenceError: key is not defined     at request.onload (gijiroku-details.html:38:29)
+                    // キーフレーズを取得する
+                    var phrases = Object.keys(body[key]['KeyPhrase'])
+                    var keyphrases = []
+                    // キーフレーズの数だけループ
+                    phrases.forEach(function (phrase) {
+                        keyphrases.push(body[key]['KeyPhrase'][phrase])
+                    });
+
+                    // キーフレーズを繋げた文字列を作成（画面表示させるために無理やり文字列連結。改善が必要）
+                    var str_keyphrases = ''
+                    keyphrases.forEach(function (keyphrase) {
+                        str_keyphrases = str_keyphrases + keyphrase + ', '
+                    })
+
+                    document.write(`
+                    <table class="title">
+                        <tbody>
+                            <tr>
+                                <th class="p1">項番<br></th>
+                                <td class="p1">
+                                    項番
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="p1">日時<br></th>
+                                <td class="p1">
+                                    ${body[key]['TimeStamp']}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="p1">議事録<br></th>
+                                <td class="p1">
+                                    ${body[key]['GijirokuText']}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="p1">キーフレーズ<br></th>
+                                <td class="p1">
+                                    ${str_keyphrases}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="p1">盛り上がり度<br></th>
+                                <td class="p1">
+                                    ${body[key]['Emo']}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>`
+                    )
+
                 });
-
-                // キーフレーズを繋げた文字列を作成（画面表示させるために無理やり文字列連結。改善が必要）
-                var str_keyphrases = ''
-                keyphrases.forEach(function (keyphrase) {
-                    str_keyphrases = str_keyphrases + keyphrase
-                })
-
-                document.write(`
-                <table class="title">
-                    <tbody>
-                        <tr>
-                            <th class="p1">項番<br></th>
-                            <td class="p1">
-                                項番
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="p1">日時<br></th>
-                            <td class="p1">
-                                ${body[key]['TimeStamp']}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="p1">議事録<br></th>
-                            <td class="p1">
-                                ${body[key]['GijirokuText']}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="p1">キーフレーズ<br></th>
-                            <td class="p1">
-                                ${str_keyphrases}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="p1">盛り上がり度<br></th>
-                            <td class="p1">
-                                ${body[key]['Emo']}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>`
-                )
-
             }
             // リクエストをURLに送信
             request.send();
