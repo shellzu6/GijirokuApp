@@ -24,7 +24,6 @@
                 var keys = Object.keys(body)
                 
                 keys.forEach(function (key) {
-                    //console.log(key) // ここにNG出てる。。。Uncaught ReferenceError: key is not defined     at request.onload (gijiroku-details.html:38:29)
                     // キーフレーズを取得する
                     var phrases = Object.keys(body[key]['KeyPhrase'])
                     var keyphrases = []
@@ -39,44 +38,46 @@
                         str_keyphrases = str_keyphrases + keyphrase + ', '
                     })
 
-                    document.write(`
-                    <table class="title">
-                        <tbody>
-                            <tr>
-                                <th class="p1">項番<br></th>
-                                <td class="p1">
-                                    項番
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="p1">日時<br></th>
-                                <td class="p1">
-                                    ${body[key]['TimeStamp']}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="p1">議事録<br></th>
-                                <td class="p1">
-                                    ${body[key]['GijirokuText']}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="p1">キーフレーズ<br></th>
-                                <td class="p1">
-                                    ${str_keyphrases}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="p1">盛り上がり度<br></th>
-                                <td class="p1">
-                                    ${body[key]['Emo']}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>`
-                    )
-
                 });
+
+                document.write(`
+                <table class="title">
+                    <tbody>
+                        <tr>
+                            <th class="p1">項番<br></th>
+                            <td class="p1">
+                                項番
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="p1">日時<br></th>
+                            <td class="p1">
+                                ${body[key]['TimeStamp']}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="p1">議事録<br></th>
+                            <td class="p1">
+                                ${body[key]['GijirokuText']}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="p1">キーフレーズ<br></th>
+                            <td class="p1">
+                                ${str_keyphrases}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="p1">盛り上がり度<br></th>
+                            <td class="p1">
+                                ${body[key]['Emo']}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>`
+                )
+
+                
             }
             // リクエストをURLに送信
             request.send();
