@@ -87,6 +87,9 @@
                         gijirokutext = body[key]['GijirokuText']
                     }
 
+                    // 詳細画面遷移用のURL作成（GijirokuIDを遷移先に渡す）
+                    detailsUrl = "https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html?gijirokuId=" + body[key]['GijirokuId']
+
                     document.write(`
                      <table width="1250" border="1">
                         <tbody>
@@ -95,7 +98,7 @@
                                     ${body[key]['TimeStamp']}
                                 </td>
                                 <td class="p1">
-                                    <a href="https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html">
+                                    <a href=${detailsUrl}>
                                         ${gijirokutext}
                                     </a>
                                 </td>
