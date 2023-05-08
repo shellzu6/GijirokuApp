@@ -95,8 +95,8 @@
                     var emo = Object.keys(body[key]['Emo'])
                     if (emo = "positive") {
                         picture = "ポジティブ.png"
-                    } else if (emo = "neutral") {
-                        picture = "n2.png"
+                    //} else if (emo = "neutral") {
+                     //   picture = "n2.png"
                     } else {
                         picture = "ネガティブ2.png"
                     }
@@ -117,8 +117,8 @@
                                     ${str_keyphrases.slice(0, -2)}
                                 </td>
                                 <td class="p3">
-                                <img src= ${picture}>
-                                <p> ${emo}</p>
+                                <img src= ${picture} width="10" height="10">
+                                ${body[key]['Emo']}
                                 </td>
                             </tr>
                         </tbody>
