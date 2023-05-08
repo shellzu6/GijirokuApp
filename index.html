@@ -37,11 +37,11 @@
           border: dashed 1px orange;
           width: 500px;
       }
-        .emo_positive{
-            width:10px;
-            height:10px;
-            background: url(src="GijirokuApp/n2.png");
-        }
+       .p3 {
+          border: dashed 1px orange;
+          width: 250px;
+          text-align: center;
+      }
 
     </style>
             <h1 class="border-arrange1">議事録一覧画面</h1>
@@ -92,12 +92,11 @@
 
                     // 盛り上がり度の値で表示する画像を変更
                     var picture = ''
-                    if (body[key]['Emo'] = "positive") {
+                    var emo = Object.keys(body[key]['Emo'])
+                    if (emo = "positive") {
                         picture = "ポジティブ.png"
-
-                    } else if (body[key]['Emo'] = "neutral") {
+                    } else if (emo = "neutral") {
                         picture = "n2.png"
-
                     } else {
                         picture = "ネガティブ2.png"
                     }
@@ -117,9 +116,9 @@
                                 <td class="p2">
                                     ${str_keyphrases.slice(0, -2)}
                                 </td>
-                                <td class="p1">
+                                <td class="p3">
                                 <img src= ${picture}>
-                                <p> ${body[key]['Emo']}</p>
+                                <p> ${emo}</p>
                                 </td>
                             </tr>
                         </tbody>
