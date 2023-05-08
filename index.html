@@ -90,6 +90,18 @@
                     // 詳細画面遷移用のURL作成（GijirokuIDを遷移先に渡す）
                     detailsUrl = "https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html?gijirokuId=" + body[key]['GijirokuId']
 
+                    // 盛り上がり度の値で表示する画像を変更
+                    var picture = ''
+                    if (body[key]['Emo'] = "positive") {
+                        picture = "ポジティブ.png"
+
+                    } else if (body[key]['Emo'] = "neutral") {
+                        picture = "n2.png"
+
+                    } else {
+                        picture = "ネガティブ2.png"
+                    }
+                    
                     document.write(`
                      <table width="1250" border="1">
                         <tbody>
@@ -106,7 +118,7 @@
                                     ${str_keyphrases.slice(0, -2)}
                                 </td>
                                 <td class="p1">
-                                <img src="n2.png" alt="作業風景">
+                                <img src= ${picture}>
                                 <p> ${body[key]['Emo']}</p>
                                 </td>
                             </tr>
