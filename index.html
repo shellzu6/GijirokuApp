@@ -66,9 +66,9 @@
             // レスポンスが返ってきた時の処理を記述 
             request.onload = function () {
                 var body = JSON.parse(request.response)['body']
-
                 var keys = Object.keys(body)
 
+                // オブジェクトキーの数分処理する
                 keys.forEach(function (key) {
                     // キーフレーズの数分取得する
                     var phrases = Object.keys(body[key]['KeyPhrase'])
@@ -83,12 +83,7 @@
                     })
 
                     // 一覧画面では議事録を10文字まで表示
-                    max_length = 10
-                    if (body[key]['GijirokuText'].length > max_length) {
-                        gijirokutext = body[key]['GijirokuText'].substr(0, max_length) + '...'
-                    } else {
-                        gijirokutext = body[key]['GijirokuText']
-                    }
+                    gijirokutext = get10Characters(body[key]['GijirokuText']);
 
                     // 詳細画面遷移用のURL作成（GijirokuIDを遷移先に渡す）
                     detailsUrl = "https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html?gijirokuId=" + body[key]['GijirokuId']
@@ -131,6 +126,16 @@
             }
             // リクエストをURLに送信
             request.send();
+        }
+
+        function get10Characters(gijiroku_text) {
+            // 一覧画面では議事録を10文字まで表示
+            max_length = 10
+            if (gijiroku_text.length > max_length) {
+                return gijiroku_text.substr(0, max_length) + '...'
+            } else {
+                return gijiroku_text
+            }
         }
     </script>
 
