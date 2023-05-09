@@ -57,7 +57,10 @@
             )
             getGijirokuData();
         }
-
+        
+        /**
+         * 議事録データ取得関数
+         */
         function getGijirokuData() {
             // XMLHttpRequestオブジェクトの作成
             var request = new XMLHttpRequest()
@@ -117,6 +120,9 @@
             request.send();
         }
 
+        /**
+         * 議事録テキスト10文字加工関数
+         */
         function get10Characters(gijiroku_text) {
             // 一覧画面では議事録を10文字まで表示
             max_length = 10
@@ -126,7 +132,10 @@
                 return gijiroku_text
             }
         }
-
+        
+        /**
+         * キーフレーズ文字列連結加工関数
+         */
         function getKeyPhrases(amountof_phrases, phrases) {
             // キーフレーズの数分取得する
             var keyphrases = []
@@ -141,6 +150,9 @@
             return str_keyphrases
         }
 
+        /**
+         * 盛り上がり度画像判定関数
+         */
         function judgePic(emo) {
             // 盛り上がり度の値で表示する画像を変更
             if (emo == "positive") {
