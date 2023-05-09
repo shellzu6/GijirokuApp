@@ -70,26 +70,17 @@
 
                 // オブジェクトキーの数分処理する
                 keys.forEach(function (key) {
-                    // キーフレーズの数分取得する
-                    var phrases = Object.keys(body[key]['KeyPhrase'])
-                    var keyphrases = []
-                    phrases.forEach(function (phrase) {
-                        keyphrases.push(body[key]['KeyPhrase'][phrase])
-                    });
-
-                    var str_keyphrases = ''
-                    keyphrases.forEach(function (keyphrase) {
-                        str_keyphrases = str_keyphrases + keyphrase + ', '
-                    })
-
                     // 一覧画面では議事録を10文字まで表示
                     gijirokutext = get10Characters(body[key]['GijirokuText']);
 
-                    // 詳細画面遷移用のURL作成（GijirokuIDを遷移先に渡す）
-                    detailsUrl = "https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html?gijirokuId=" + body[key]['GijirokuId']
+                    // キーフレーズの数分取得する
+                    str_keyphrases = getKeyPhrases(Object.keys(body[key]['KeyPhrase']), body[key]['KeyPhrase']);
 
                     // 盛り上がり度の値で表示する画像を変更
                     picture = judgePic(body[key]['Emo']);
+
+                    // 詳細画面遷移用のURL作成（GijirokuIDを遷移先に渡す）
+                    detailsUrl = "https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html?gijirokuId=" + body[key]['GijirokuId']
 
                     document.write(`
                      <table width="1250" border="1">
@@ -130,6 +121,20 @@
             }
         }
 
+        function getKeyPhrases(amountof_phrases, phrases) {
+            // キーフレーズの数分取得する
+            var keyphrases = []
+            amountof_phrases.forEach(function (phrase) {
+                keyphrases.push(phrases[phrase])
+            });
+
+            var str_keyphrases = ''
+            keyphrases.forEach(function (keyphrase) {
+                str_keyphrases = str_keyphrases + keyphrase + ', '
+            })
+            return str_keyphrases
+        }
+
         function judgePic(emo) {
             // 盛り上がり度の値で表示する画像を変更
             if (emo == "positive") {
@@ -140,6 +145,7 @@
                 return "n2.png"
             }
         }
+
     </script>
 
     </html>
