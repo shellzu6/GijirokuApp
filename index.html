@@ -79,6 +79,9 @@
                     // キーフレーズ取得
                     strKeyphrases = getKeyPhrases(Object.keys(body[key]['KeyPhrase']), body[key]['KeyPhrase']).slice(0, -2)
                     
+                    // 盛り上がり度を取得
+                    emo = body[key]['Emo']
+
                     // 盛り上がり度画像を取得
                     picture = judgePic(body[key]['Emo']);
 
@@ -86,27 +89,27 @@
                     detailsUrl = "https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html?gijirokuId=" + body[key]['GijirokuId']
 
                     document.write(`
-                     <table width="1250" border="1">
-                        <tbody>
-                            <tr>
-                                <td class="p1">
-                                    ${timeStamp}
-                                </td>
-                                <td class="p1">
-                                    <a href=${detailsUrl}>
-                                        ${gijirokuText}
-                                    </a>
-                                </td>
-                                <td class="p2">
-                                    ${strKeyphrases}
-                                </td>
-                                <td class="p3">
-                                <img src= ${picture} width="100" height="100"><br>
-                                ${body[key]['Emo']}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>`
+                        <table width="1250" border="1">
+                            <tbody>
+                                <tr>
+                                    <td class="p1">
+                                        ${timeStamp}
+                                    </td>
+                                    <td class="p1">
+                                        <a href=${detailsUrl}>
+                                            ${gijirokuText}
+                                        </a>
+                                    </td>
+                                    <td class="p2">
+                                        ${strKeyphrases}
+                                    </td>
+                                    <td class="p3">
+                                        <img src= ${picture} width="100" height="100"><br>
+                                        ${emo}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>`
                     )
                 });
             }
