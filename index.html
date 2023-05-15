@@ -2,23 +2,10 @@
 
     <!DOCTYPE html>
     <html lang="ja">
-
-
-    <head>
-        // cssは読み込めていなさそう
-        <link rel="stylesheet" href="style.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>議事録管理システム</title>
-    </head>
-
-    <body onLoad="init()">
-        <p>一覧画面</p>
-        <a href="index.html">議事録一覧画面</a>
-    </body>
     <script>
         function init() {
             document.write(`
+            <link rel="stylesheet" href="style.css">
                 <style>
                     .border-arrange1 {
                         padding: 1rem 2rem;
@@ -47,6 +34,7 @@
                 <table width="1250" border="1">
                     <thead>
                         <tr>
+                        <p>test </p>
                             <th class="p1">日時<br></th>
                             <th class="p1">議事録<br></th>
                             <th class="p2">キーフレーズ<br></th>
