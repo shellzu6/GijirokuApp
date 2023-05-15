@@ -1,19 +1,21 @@
 <! --shellzuの作業場所-->
 
     <!DOCTYPE html>
-    <html lang="ja">
-    <body onLoad="init()">
-        <p>一覧画面</p>
-        <a href="index.html">議事録一覧画面</a>
-    </body>
-    <script>
-        function init() {
-            document.write(`
+        <html lang="ja">
     <head>
         <link rel="stylesheet" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+        <title>議事録管理システム</title>
+
+    <body onLoad="init()">
+        <p>一覧画面</p>
+        <a href="index.html">議事録一覧画面</a>
+    </body>
+        
+    <script>
+        function init() {
+            document.write(`
                 <style>
                     .border-arrange1 {
                         padding: 1rem 2rem;
@@ -38,7 +40,6 @@
                     }
 
                 </style>
-                <p>一覧画面</p>
                 <h1 class="border-arrange1">議事録一覧画面</h1>
                 <table width="1250" border="1">
                     <thead>
@@ -162,5 +163,5 @@
         }
 
     </script>
-
+    </head>
     </html>
