@@ -89,7 +89,7 @@
 
                     // データ整頓処理ここから---------------------
                     // 1件分のデータを辞書に詰める
-                    data = { "timeStamp": timeStamp, "detailsUrl": detailsUrl, "gijirokuText": gijirokuText, "strKeyphrases": strKeyphrases, "emo": emo, "picture": picture }
+                    data = { "timeStamp": timeStamp, "gijirokuText": gijirokuText, "strKeyphrases": strKeyphrases, "emo": emo, "picture": picture , "detailsUrl": detailsUrl}
 
                     // 1件分のデータをタイムスタンプとともに辞書につめる
                     // {timeStamp: 'xxxxxxxx', data:{ "timeStamp": timestamp", gijirokuText": gijirokuText, "strKeyphrases": strKeyphrases, "emo": emo, "picture": picture }}
@@ -113,6 +113,8 @@
             // リクエストをURLに送信
             request.send();
         }
+        
+        
 
         /**
          * 議事録テキスト10文字加工関数
