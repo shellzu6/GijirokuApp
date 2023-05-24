@@ -1,19 +1,19 @@
-<! --shellzuの作業場所-->
+<!DOCTYPE html>
+<html lang="ja">
 
-    <!DOCTYPE html>
-    <html lang="ja">
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<body onLoad="init()">
+    <a href="index.html">議事録詳細</a>
 
     <script>
-
-        window.onload = function () {
+        function init() {
             document.write(`
-     <style>
+            <style>
         .border-arrange1 {
         padding: 1rem 2rem;
         color: #fff;
@@ -47,63 +47,166 @@
                         </thead>
                     </table>`
             )
+            // 議事録データ取得
+            getGijirokuData();
+        }
 
+        /**
+         * 議事録データ取得関数
+         */
+        function getGijirokuData() {
             // XMLHttpRequestオブジェクトの作成
             var request = new XMLHttpRequest()
             // URLを開く
-            request.open('GET', 'https://oka6u9lsn6.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku', true)
+            request.open('GET', 'https://7f88pluwp9.execute-api.ap-northeast-1.amazonaws.com/dev/get-gijiroku-byid', true)
             // レスポンスが返ってきた時の処理を記述 
             request.onload = function () {
                 var body = JSON.parse(request.response)['body']
-
                 var keys = Object.keys(body)
 
+                var dic_all = []
+                // オブジェクトキーの数分処理する
                 keys.forEach(function (key) {
-                    // キーフレーズの数分取得する
-                    var phrases = Object.keys(body[key]['KeyPhrase'])
-                    var keyphrases = []
-                    phrases.forEach(function (phrase) {
-                        keyphrases.push(body[key]['KeyPhrase'][phrase])
-                    });
+                    // 日時取得
+                    timeStamp = body[key]['TimeStamp']
 
-                    var str_keyphrases = ''
-                    keyphrases.forEach(function (keyphrase) {
-                        str_keyphrases = str_keyphrases + keyphrase + ', '
-                    })
+                    // 議事録取得
+                    // gijirokuText = get10Characters(body[key]['GijirokuText']);
+                    gijirokuText = body[key]['GijirokuText']
 
-                    // 一覧画面では議事録を10文字まで表示
-                    // max_length = 10
-                    // if (body[key]['GijirokuText'].length > max_length) {
-                    //     gijirokutext = body[key]['GijirokuText'].substr(0, max_length) + '...'
-                    // }else{
-                    //     gijirokutext = body[key]['GijirokuText']
-                    // }
+                    // キーフレーズ取得
+                    strKeyphrases = getKeyPhrases(Object.keys(body[key]['KeyPhrase']), body[key]['KeyPhrase']).slice(0, -2)
 
-                    document.write(`
-                     <table width="1250" border="1">
-                        <tbody>
-                            <tr>
-                                <td class="p1">
-                                    ${body[key]['TimeStamp']}
-                                </td>
-                                <td class="p3">
-                                    ${body[key]['GijirokuText']}
-                                </td>
-                                <td class="p2">
-                                    ${str_keyphrases.slice(0, -2)}
-                                </td>
-                                <td class="p1">
-                                    ${body[key]['Emo']}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>`
-                    )
+                    // 盛り上がり度を取得
+                    emo = body[key]['Emo']
+
+                    // 盛り上がり度画像を取得
+                    picture = judgePic(body[key]['Emo']);
+
+                    // 詳細画面遷移用のURL作成（GijirokuIDを遷移先に渡す）
+                    // TODO:まだ静的
+                    detailsUrl = "https://main.dts6rdr07hm07.amplifyapp.com/gijiroku-zenbun.html?gijirokuId=" + body[key]['GijirokuId']
+
+                    // データ整頓処理ここから---------------------
+                    // 1件分のデータを辞書に詰める
+                    data = { "timeStamp": timeStamp, "detailsUrl": detailsUrl, "gijirokuText": gijirokuText, "strKeyphrases": strKeyphrases, "emo": emo, "picture": picture }
+
+                    // 1件分のデータをタイムスタンプとともに辞書につめる
+                    // {timeStamp: 'xxxxxxxx', data:{ "timeStamp": timestamp", gijirokuText": gijirokuText, "strKeyphrases": strKeyphrases, "emo": emo, "picture": picture }}
+                    var dic = {}
+                    dic.timeStamp = timeStamp
+                    dic.data = data
+
+                    // 1件分の辞書を全件配列に追加する
+                    // [{timeStamp: 'xxxxxxxx', data:{ "timeStamp": timestamp", gijirokuText"・・・}}, {timeStamp: 'xxxxxxxx', data:{ "timeStamp": timestamp", gijirokuText"。。。}]
+                    dic_all.push(dic)
+
+                    // データ整頓処理ここまで---------------------
                 });
+
+                // 全件配列を日付でソート
+                result_sorted_data = sortByTimestamp(dic_all)
+
+                // 画面表示
+                viewGijirokuData(result_sorted_data)
             }
             // リクエストをURLに送信
             request.send();
         }
-    </script>
 
-    </html>
+        /**
+         * 議事録テキスト10文字加工関数
+         */
+        function get10Characters(gijiroku_text) {
+            // 一覧画面では議事録を10文字まで表示
+            max_length = 10
+            if (gijiroku_text.length > max_length) {
+                return gijiroku_text.substr(0, max_length) + '...'
+            } else {
+                return gijiroku_text
+            }
+        }
+
+        /**
+         * キーフレーズ文字列連結加工関数
+         */
+        function getKeyPhrases(amountof_phrases, phrases) {
+            // キーフレーズの数分取得する
+            var keyphrases = []
+            amountof_phrases.forEach(function (phrase) {
+                keyphrases.push(phrases[phrase])
+            });
+
+            var str_keyphrases = ''
+            keyphrases.forEach(function (keyphrase) {
+                str_keyphrases = str_keyphrases + keyphrase + ', '
+            })
+            return str_keyphrases
+        }
+
+        /**
+         * 盛り上がり度画像判定関数
+         */
+        function judgePic(emo) {
+            // 盛り上がり度の値で表示する画像を変更
+            if (emo == "positive") {
+                return "ポジティブ.png"
+            } else if (emo == "negative") {
+                return "ネガティブ2.png"
+            } else {
+                return "n2.png"
+            }
+        }
+
+        /**
+         * 日付でソート関数
+         */
+        function sortByTimestamp(array_data) {
+            // Timestampで並び替え
+            array_data.sort(function (first, second) {
+                //日付オブジェクト化
+                first_date = new Date(first.timeStamp)
+                second_date = new Date(second.timeStamp)
+                return first_date - second_date
+            });
+            return array_data
+        }
+
+        /**
+         * 画面表示関数
+         */
+        function viewGijirokuData(sorted_data) {
+            // 要素の数分処理する
+            sorted_data.forEach(function (elem) {
+                // 画面表示
+                document.write(`
+                    <table width="1250" border="1">
+                        <tbody>
+                            <tr>
+                                <td class="p1">
+                                    ${elem.data.timeStamp}
+                                </td>
+                                <td class="p1">
+                                    ${elem.data.gijirokuText}
+                                </td>
+                                <td class="p2">
+                                    ${elem.data.strKeyphrases}
+                                </td>
+                                <td class="p3">
+                                    <img src= ${elem.data.picture} width="100" height="100"><br>
+                                    ${elem.data.emo}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>`
+                )
+
+
+            });
+
+        }
+
+    </script>
+</body>
+
+</html>
