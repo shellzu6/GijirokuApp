@@ -168,7 +168,8 @@
                     //日付オブジェクト化
                     first_date = new Date(first.timeStamp)
                     second_date = new Date(second.timeStamp)
-                    return first_date - second_date
+                    // return first_date - second_date
+                    return second_date - first_date
                 });
                 return array_data
             }
